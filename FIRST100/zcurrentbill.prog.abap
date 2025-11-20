@@ -1,0 +1,22 @@
+*&---------------------------------------------------------------------*
+*& Report ZCURRENTBILL
+*&---------------------------------------------------------------------*
+*&
+*&---------------------------------------------------------------------*
+REPORT ZCURRENTBILL.
+INCLUDE: ZINCLUDE2.
+PARAMETERS: SERVID TYPE I,
+            PHASE TYPE P,
+            CURRREAD TYPE P,
+            PREVREAD TYPE P.
+DATA: UNITRATE TYPE P, UNITUSED TYPE P, BILLAMT TYPE P.
+START-OF-SELECTION.
+     PERFORM SUBR USING PHASE CHANGING UNITRATE.
+     PERFORM SUBR1 USING CURRREAD PREVREAD CHANGING UNITUSED.
+     PERFORM SUBR2 USING UNITRATE UNITUSED CHANGING BILLAMT.
+
+WRITE:/5 'BILL AMOUNT:' COLOR 4, BILLAMT COLOR 4.
+WRITE:/5 'SERVICE ID:' COLOR 5, SERVID COLOR 5,
+      /5 'PHASE NO:' COLOR 6, PHASE COLOR 6,
+      /5 'CURRENT READINGS :' COLOR 7, CURRREAD COLOR 7,
+      /5 'PREVIOUS READINGS:' COLOR 2, PREVREAD COLOR 2.

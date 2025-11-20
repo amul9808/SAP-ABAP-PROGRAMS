@@ -1,0 +1,32 @@
+*&---------------------------------------------------------------------*
+*& Report ZALVCLASSICALREP
+*&---------------------------------------------------------------------*
+*&
+*&---------------------------------------------------------------------*
+REPORT ZALVCLASSICALREP
+NO STANDARD PAGE HEADING
+MESSAGE-ID ZMSGCL.
+*DECLARATION
+DATA ITAB TYPE TABLE OF LFA1.
+DATA: V1 TYPE LFA1-LIFNR.
+*INPUT
+ SELECTION-SCREEN BEGIN OF BLOCK B1 WITH FRAME TITLE T1.
+   SELECT-OPTIONS VENDOR FOR V1.
+ SELECTION-SCREEN END OF BLOCK B1.
+ INITIALIZATION.
+ T1 = 'SELECT VENDOR'.
+*PROCESS
+ START-OF-SELECTION.
+    SELECT * INTO  TABLE ITAB FROM LFA1
+      WHERE LIFNR IN VENDOR.
+*OUTPUT
+IF SY-SUBRC EQ 0.
+CALL FUNCTION 'REUSE_ALV_GRID_DISPLAY'
+ EXPORTING
+   I_STRUCTURE_NAME                  = 'LFA1'
+   I_GRID_TITLE                      = 'CUSTOMER MASTER'
+  TABLES
+    T_OUTTAB                         = ITAB.
+ELSE.
+    MESSAGE 'VENDOR NOT FOUND' TYPE 'I'.
+ENDIF.

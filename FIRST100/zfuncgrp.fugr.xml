@@ -1,0 +1,266 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<abapGit version="v1.0.0" serializer="LCL_OBJECT_FUGR" serializer_version="v1.0.0">
+ <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
+  <asx:values>
+   <AREAT>AMULYA&apos;S FUNCTION GROUP</AREAT>
+   <INCLUDES>
+    <SOBJ_NAME>LZFUNCGRPTOP</SOBJ_NAME>
+    <SOBJ_NAME>LZFUNCGRPU01</SOBJ_NAME>
+    <SOBJ_NAME>LZFUNCGRPU03</SOBJ_NAME>
+    <SOBJ_NAME>LZFUNCGRPU06</SOBJ_NAME>
+    <SOBJ_NAME>SAPLZFUNCGRP</SOBJ_NAME>
+   </INCLUDES>
+   <FUNCTIONS>
+    <item>
+     <FUNCNAME>RFMPODATA</FUNCNAME>
+     <REMOTE_CALL>R</REMOTE_CALL>
+     <SHORT_TEXT>REMOTE FUNCTION MODULE FOR PO INFO</SHORT_TEXT>
+     <IMPORT>
+      <RSIMP>
+       <PARAMETER>RFM_LIFNR</PARAMETER>
+       <TYP>EKKO-LIFNR</TYP>
+      </RSIMP>
+     </IMPORT>
+     <TABLES>
+      <RSTBL>
+       <PARAMETER>RFM_ITEKKO</PARAMETER>
+       <DBSTRUCT>EKKO</DBSTRUCT>
+      </RSTBL>
+     </TABLES>
+     <EXCEPTION>
+      <RSEXC>
+       <EXCEPTION>NOTFOUND</EXCEPTION>
+      </RSEXC>
+     </EXCEPTION>
+     <DOCUMENTATION>
+      <RSFDO>
+       <PARAMETER>RFM_LIFNR</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Vendor&apos;s account number</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>RFM_ITEKKO</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Purchasing Document Header</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>NOTFOUND</PARAMETER>
+       <KIND>X</KIND>
+       <STEXT>VENDOR NO. NOT FOUND</STEXT>
+      </RSFDO>
+     </DOCUMENTATION>
+    </item>
+    <item>
+     <FUNCNAME>ZBAPI_FUNCMOD2</FUNCNAME>
+     <REMOTE_CALL>R</REMOTE_CALL>
+     <SHORT_TEXT>CUSTOMER MASTER DATA</SHORT_TEXT>
+     <IMPORT>
+      <RSIMP>
+       <PARAMETER>BAPI_STRT</PARAMETER>
+       <TYP>LFA1-LIFNR</TYP>
+      </RSIMP>
+      <RSIMP>
+       <PARAMETER>BAPI_END</PARAMETER>
+       <TYP>LFA1-LIFNR</TYP>
+      </RSIMP>
+     </IMPORT>
+     <EXPORT>
+      <RSEXP>
+       <PARAMETER>RETURN</PARAMETER>
+       <TYP>BAPIRET2</TYP>
+      </RSEXP>
+     </EXPORT>
+     <TABLES>
+      <RSTBL>
+       <PARAMETER>ITCUST</PARAMETER>
+       <DBSTRUCT>ZBAPISTRUCT</DBSTRUCT>
+      </RSTBL>
+     </TABLES>
+     <EXCEPTION>
+      <RSEXC>
+       <EXCEPTION>NOTFOUND</EXCEPTION>
+      </RSEXC>
+     </EXCEPTION>
+     <DOCUMENTATION>
+      <RSFDO>
+       <PARAMETER>BAPI_STRT</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Account Number of Vendor or Creditor</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>BAPI_END</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Account Number of Vendor or Creditor</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>RETURN</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Return Parameter</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>ITCUST</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>CUSTOMER MASTER DATA</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>NOTFOUND</PARAMETER>
+       <KIND>X</KIND>
+       <STEXT>CUSTOMER NOT FOUND</STEXT>
+      </RSFDO>
+     </DOCUMENTATION>
+    </item>
+    <item>
+     <FUNCNAME>ZFOODCOURTFM</FUNCNAME>
+     <SHORT_TEXT>FOOD MASTER DATA</SHORT_TEXT>
+     <IMPORT>
+      <RSIMP>
+       <PARAMETER>FMD_SALESID</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>ZFOODCOURT-SALESID</TYP>
+      </RSIMP>
+     </IMPORT>
+     <EXPORT>
+      <RSEXP>
+       <PARAMETER>FMD_CSTNAME</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>ZFOODCOURT-CSTNAME</TYP>
+      </RSEXP>
+      <RSEXP>
+       <PARAMETER>FMD_PRDTNAME</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>ZFOODCOURT-PRDTNAME</TYP>
+      </RSEXP>
+      <RSEXP>
+       <PARAMETER>FMD_QTTY</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>ZFOODCOURT-QTTY</TYP>
+      </RSEXP>
+      <RSEXP>
+       <PARAMETER>FMD_PRICE</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>ZFOODCOURT-PRICE</TYP>
+      </RSEXP>
+      <RSEXP>
+       <PARAMETER>FMD_CRTDON</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>ZFOODCOURT-CRTDON</TYP>
+      </RSEXP>
+      <RSEXP>
+       <PARAMETER>FMD_CRTDTM</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>ZFOODCOURT-CRTDTM</TYP>
+      </RSEXP>
+     </EXPORT>
+     <EXCEPTION>
+      <RSEXC>
+       <EXCEPTION>NOTFOUND</EXCEPTION>
+      </RSEXC>
+     </EXCEPTION>
+     <DOCUMENTATION>
+      <RSFDO>
+       <PARAMETER>FMD_SALESID</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>SALES NUMBER</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>FMD_CSTNAME</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>CUSTOMER NAME</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>FMD_PRDTNAME</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>PRODUCT NAME</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>FMD_QTTY</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>QUANTITY DATA</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>FMD_PRICE</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>FOOD PRICE</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>FMD_CRTDON</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>CREATED ON DATE</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>FMD_CRTDTM</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>CREATED TIME</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>NOTFOUND</PARAMETER>
+       <KIND>X</KIND>
+       <STEXT>CUSTOMER DATA NOT FOUND</STEXT>
+      </RSFDO>
+     </DOCUMENTATION>
+    </item>
+    <item>
+     <FUNCNAME>ZPURCHASEORDERFMD</FUNCNAME>
+     <SHORT_TEXT>PURCHASE ORDER HEADER DATA</SHORT_TEXT>
+     <IMPORT>
+      <RSIMP>
+       <PARAMETER>FMD_EBELN</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>EKKO-EBELN</TYP>
+      </RSIMP>
+     </IMPORT>
+     <EXPORT>
+      <RSEXP>
+       <PARAMETER>FMD_ITEKKO</PARAMETER>
+       <DBFIELD>EKKO</DBFIELD>
+       <REFERENCE>X</REFERENCE>
+      </RSEXP>
+      <RSEXP>
+       <PARAMETER>FMD_ITLFA1</PARAMETER>
+       <DBFIELD>LFA1</DBFIELD>
+       <REFERENCE>X</REFERENCE>
+      </RSEXP>
+     </EXPORT>
+     <TABLES>
+      <RSTBL>
+       <PARAMETER>FMD_ITEKPO</PARAMETER>
+       <DBSTRUCT>EKPO</DBSTRUCT>
+      </RSTBL>
+     </TABLES>
+     <EXCEPTION>
+      <RSEXC>
+       <EXCEPTION>NOTFOUND</EXCEPTION>
+      </RSEXC>
+     </EXCEPTION>
+     <DOCUMENTATION>
+      <RSFDO>
+       <PARAMETER>FMD_EBELN</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Purchasing Document Number</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>FMD_ITEKKO</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Purchasing Document Header</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>FMD_ITLFA1</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Vendor Master (General Section)</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>FMD_ITEKPO</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Purchasing Document Item</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>NOTFOUND</PARAMETER>
+       <KIND>X</KIND>
+       <STEXT>PURCHASE NOT FOUND</STEXT>
+      </RSFDO>
+     </DOCUMENTATION>
+    </item>
+   </FUNCTIONS>
+  </asx:values>
+ </asx:abap>
+</abapGit>

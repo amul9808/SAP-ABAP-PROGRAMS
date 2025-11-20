@@ -1,0 +1,93 @@
+REPORT ZRFMPODATA
+NO STANDARD PAGE HEADING.
+*DECLARATIONS
+DATA: ITEKKO TYPE TABLE OF EKKO.
+DATA: V1 TYPE EKKO-AEDAT.
+*INPUT
+SELECTION-SCREEN BEGIN OF BLOCK B1 WITH FRAME TITLE T1.
+   PARAMETERS VENDOR TYPE EKKO-LIFNR.
+   SELECT-OPTIONS DATE FOR V1.
+SELECTION-SCREEN END OF BLOCK B1.
+
+SELECTION-SCREEN BEGIN OF BLOCK B2 WITH FRAME TITLE T2.
+  SELECTION-SCREEN ULINE.
+     SELECTION-SCREEN COMMENT /1(40) CV.
+  SELECTION-SCREEN ULINE.
+    PARAMETERS: CLNT800 RADIOBUTTON GROUP PO,
+                CLNT810 RADIOBUTTON GROUP PO.
+SELECTION-SCREEN END OF BLOCK B2.
+INITIALIZATION.
+T1 = 'SELECT VENDOR NUMBER AND DATE'.
+T2 = 'SELECT CLIENT'.
+CV = 'SELECT PO 800 PO 810'.
+*PROCESS
+START-OF-SELECTION.
+    IF CLNT800 EQ 'X'.
+CALL FUNCTION 'RFMPODATA'
+  EXPORTING
+    RFM_LIFNR        = VENDOR
+  TABLES
+    RFM_ITEKKO       = ITEKKO
+ EXCEPTIONS
+   NOTFOUND         = 1
+   OTHERS           = 2.
+
+       CASE SY-SUBRC.
+         WHEN 0.
+           PERFORM SUBR_800OUTPUT.
+         WHEN 1.
+           MESSAGE 'PURCHASE ORDER DATA IN CLIENT 800 NOT FOUND' TYPE 'I'.
+         WHEN 2.
+           MESSAGE ID sy-msgid TYPE sy-msgty NUMBER sy-msgno
+                     WITH sy-msgv1 sy-msgv2 sy-msgv3 sy-msgv4.
+        ENDCASE.
+
+    ELSEIF CLNT810 EQ 'X'.
+      CALL FUNCTION 'RFMPODATA' DESTINATION 'RCON810'
+  EXPORTING
+    RFM_LIFNR        = VENDOR
+  TABLES
+    RFM_ITEKKO       = ITEKKO
+ EXCEPTIONS
+   NOTFOUND         = 1
+   OTHERS           = 2.
+
+      CASE SY-SUBRC.
+         WHEN 0.
+           PERFORM SUBR_810OUTPUT.
+         WHEN 1.
+           MESSAGE 'PURCHASE ORDER DATA IN CLIENT 810 NOT FOUND' TYPE 'I'.
+         WHEN 2.
+           MESSAGE ID sy-msgid TYPE sy-msgty NUMBER sy-msgno
+                     WITH sy-msgv1 sy-msgv2 sy-msgv3 sy-msgv4.
+        ENDCASE.
+    ENDIF.
+*OUTPUT
+*&-----------------------------*
+*&      Form  SUBR_800OUTPUT
+*&-----------------------------*
+FORM SUBR_800OUTPUT .
+    CALL FUNCTION 'REUSE_ALV_GRID_DISPLAY'
+     EXPORTING
+       I_STRUCTURE_NAME                 = 'EKKO'
+       I_GRID_TITLE                     = 'PURCHASE ORDER DATA FROM CLIENT 800'
+      TABLES
+        T_OUTTAB                        = ITEKKO
+     EXCEPTIONS
+       PROGRAM_ERROR                     = 1
+       OTHERS                            = 2.
+ENDFORM.
+*&-----------------------------*
+*&      Form  SUBR_810OUTPUT
+*&-----------------------------*
+FORM SUBR_810OUTPUT .
+     CALL FUNCTION 'REUSE_ALV_GRID_DISPLAY'
+     EXPORTING
+       I_STRUCTURE_NAME                 = 'EKKO'
+       I_GRID_TITLE                     = 'PURCHASE ORDER DATA FROM CLIENT 810'
+      TABLES
+        T_OUTTAB                        = ITEKKO
+     EXCEPTIONS
+       PROGRAM_ERROR                     = 1
+       OTHERS                            = 2.
+ENDFORM.

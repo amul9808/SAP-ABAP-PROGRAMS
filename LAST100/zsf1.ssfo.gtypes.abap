@@ -1,0 +1,31 @@
+TYPES: BEGIN OF TYPE1,
+         LIFNR TYPE LFA1-LIFNR,
+         LAND1 TYPE LFA1-LAND1,
+         NAME1 TYPE LFA1-NAME1,
+         ORT01 TYPE LFA1-ORT01,
+         PSTLZ TYPE LFA1-ORT01,
+       END OF TYPE1.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

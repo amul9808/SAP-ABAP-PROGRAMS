@@ -1,0 +1,12 @@
+*&---------------------------------------------------------------------*
+*&  Include           ZINC8
+*&---------------------------------------------------------------------*
+SELECTION-SCREEN BEGIN OF BLOCK B1 WITH FRAME TITLE T1.
+  PARAMETERS VENDOR TYPE EKKO-LIFNR.
+SELECTION-SCREEN END OF BLOCK B1.
+SELECTION-SCREEN BEGIN OF BLOCK B2 WITH FRAME TITLE T2.
+  PARAMETERS DATE TYPE EKKO-AEDAT.
+SELECTION-SCREEN END OF BLOCK B2.
+INITIALIZATION.
+T1 = 'VENDOR NUMBER'.
+T2 = 'DATE'.

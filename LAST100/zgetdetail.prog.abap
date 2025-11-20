@@ -1,0 +1,47 @@
+*&---------------------------------------------------------------------*
+*& Report ZGETDETAIL
+*&---------------------------------------------------------------------*
+*&
+*&---------------------------------------------------------------------*
+REPORT ZGETDETAIL.
+*DECLARATIONS
+PARAMETERS: ORDERNO TYPE BAPIEKKO-PO_NUMBER OBLIGATORY.
+
+DATA: IT_ITEMS LIKE TABLE OF BAPIEKPO,
+      WA_ITEMS LIKE LINE OF IT_ITEMS.
+
+DATA: IT_RETURN LIKE TABLE OF BAPIRETURN,
+      WA_RETURN LIKE LINE OF IT_RETURN.
+
+DATA: IT_HISTORY LIKE TABLE OF BAPIEKBE,
+      WA_HISTORY LIKE LINE OF IT_HISTORY.
+*PROCESS
+START-OF-SELECTION.
+CALL FUNCTION 'BAPI_PO_GETDETAIL'
+  EXPORTING
+   PURCHASEORDER                    = ORDERNO
+   ITEMS                            = 'X'
+   HISTORY                          = 'X'
+
+ TABLES
+   PO_ITEMS                         = IT_ITEMS
+   PO_ITEM_HISTORY                  = IT_HISTORY
+   RETURN                           = IT_RETURN.
+ END-OF-SELECTION.
+
+IF NOT IT_RETURN IS INITIAL.
+  LOOP AT IT_RETURN INTO WA_RETURN.
+    WRITE:/ WA_RETURN-MESSAGE.
+  ENDLOOP.
+ELSE.
+  WRITE:/ 'ITEM DETAILS'.
+  LOOP AT IT_ITEMS INTO WA_ITEMS.
+    WRITE:/ WA_ITEMS-PO_NUMBER, WA_ITEMS-PO_ITEM.
+  ENDLOOP.
+ULINE.
+  WRITE:/ 'HISTORY DETAILS'.
+  LOOP AT IT_HISTORY INTO WA_HISTORY.
+    WRITE:/ WA_HISTORY-PO_ITEM, WA_HISTORY-DOC_YEAR, WA_HISTORY-MAT_DOC.
+  ENDLOOP.
+ULINE.
+ENDIF.
